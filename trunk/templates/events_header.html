@@ -1,0 +1,16 @@
+<{if $events_show_breadcrumb == TRUE}>
+
+<div class="events_headertable">
+	<{if $events_module_home}>
+	<span class="events_modulename"><{$events_module_home}></span>
+	<{/if}>
+	<{if $events_category_path}>
+	<span class="events_breadcrumb"><{if $events_module_home}>&gt;<{/if}><{$events_category_path}></span>
+	<{/if}>
+</div>
+
+<{else}>
+
+<h1><{$events_page_title}></h1>
+
+<{/if}>
