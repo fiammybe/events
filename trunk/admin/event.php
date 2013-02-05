@@ -97,6 +97,7 @@ if (in_array($clean_op, $valid_op, TRUE)) {
 			icms_cp_header();
 			$icmsModule->displayAdminMenu(0, _AM_EVENTS_EVENTS);
 			$objectTable = new icms_ipf_view_Table($events_event_handler);
+			$objectTable->addQuickSearch("title");
 			$objectTable->addColumn(new icms_ipf_view_Column("online_status"));
 			$objectTable->addColumn(new icms_ipf_view_Column("title"));
 			$objectTable->addColumn(new icms_ipf_view_Column("coverage"));
