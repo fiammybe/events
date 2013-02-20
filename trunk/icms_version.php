@@ -34,10 +34,10 @@ $modversion = array(
 
 /**  Development information */
 	"status_version"			=> "1.0",
-	"status"					=> "Beta",
-	"date"						=> "Unreleased",
+	"status"					=> "Final",
+	"date"						=> "20/2/2013",
 	"author_word"				=> "",
-	"warning"					=> _CO_ICMS_WARNING_BETA,
+	"warning"					=> "",
 
 /** Contributors */
 	"developer_website_url"		=> "https://www.isengard.biz",
