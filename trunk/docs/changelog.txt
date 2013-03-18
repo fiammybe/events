@@ -7,3 +7,4 @@ Version 1.01 Beta
 =================
 - Incorporated the calendar functionality added by Will.
 - Add start page preference (list view vs calendar view).
+- Add submenu (displays 'calendar' or 'list' depending on the start page preference).
