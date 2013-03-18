@@ -11,7 +11,6 @@
  */
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
-
 define("_MD_EVENTS_ADMIN_PAGE", ":: Admin page ::");
-
 define("_MD_EVENTS_ALL_EVENTS", "All events");
+define("_MD_EVENTS_CALENDAR", "Calendar");

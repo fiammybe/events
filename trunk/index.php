@@ -15,5 +15,7 @@
 include_once "../../mainfile.php";
 include_once ICMS_ROOT_PATH . "/header.php";
  
-header('location: event.php');
+$start_options = array(0 => 'event.php', 1 => 'calendar.php');
+$start_page = $start_options[icms::$module->config['events_start_page']];
+header('location: ' . $start_page);
 exit();

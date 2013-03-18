@@ -17,10 +17,10 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
 	"name"						=> _MI_EVENTS_MD_NAME,
-	"version"					=> 1.0,
+	"version"					=> 1.01,
 	"description"				=> _MI_EVENTS_MD_DESC,
 	"author"					=> "Madfish (Simon Wilkinson)",
-	"credits"					=> "Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
+	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
 	"help"						=> "",
 	"license"					=> "GNU General Public License (GPL)",
 	"official"					=> 0,
@@ -33,9 +33,9 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "1.0",
-	"status"					=> "Final",
-	"date"						=> "20/2/2013",
+	"status_version"			=> "1.01",
+	"status"					=> "Beta",
+	"date"						=> "18/3/2013",
 	"author_word"				=> "",
 	"warning"					=> "",
 
@@ -55,13 +55,16 @@ $modversion = array(
 
 /** Search information */
 	"hasSearch"					=> 1,
-	"search"					=> array("file" => "include/search.inc.php", "func" => "events_search"),
+	"search"					=> array("file" => "include/search.inc.php", "func" => "events_search"));
 
 /** Menu information */
-	"hasMain"					=> 1,
+	$i = 0;
+	$modversion["hasMain"]		= 1;
+	$modversion['sub'][$i]['name'] = _MI_EVENTS_CALENDAR;
+	$modversion['sub'][$i]['url'] = "calendar.php";
 
 /** Comments information */
-	"hasComments"				=> 0);
+	$modversion["hasComments"]	= 0;
 
 /** other possible types: testers, translators, documenters and other */
 $modversion['people']['developers'][] = "Madfish (Simon Wilkinson)";
@@ -75,6 +78,7 @@ $modversion["tables"] = icms_getTablesArray($modversion['dirname'], $modversion[
 $modversion['templates'] = array(
 	array("file" => "events_admin_event.html", "description" => "Event admin index"),
 	array("file" => "events_event.html", "description" => "Event index"),
+	array("file" => "events_calendar.html", "description" => "Event Calendar"),
 	array("file" => "events_requirements.html", "description" => "Event requirements"),
 	array("file" => "events_header.html", "description" => "Module header"),
 	array("file" => "events_footer.html", "description" => "Module footer"));
@@ -90,6 +94,19 @@ $modversion['blocks'][1] = array(
   'template' => 'events_upcoming.html');
 
 /** Preferences information */
+
+$start_options = array(0 => 'event.php', 1 => 'calendar.php');
+$start_options = array_flip($start_options);
+
+// Mdule start page
+$modversion['config'][3] = array(
+	'name' => 'events_start_page',
+	'title' => '_MI_EVENTS_START_PAGE',
+	'description' => '_MI_EVENTS_START_PAGE_DSC',
+	'formtype' => 'select',
+	'valuetype' => 'text',
+	'options' => $start_options,
+	'default' =>  '0');
 
 // Display breadcrumb
 $modversion['config'][] = array(
