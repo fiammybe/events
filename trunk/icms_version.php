@@ -60,8 +60,13 @@ $modversion = array(
 /** Menu information */
 	$i = 0;
 	$modversion["hasMain"]		= 1;
-	$modversion['sub'][$i]['name'] = _MI_EVENTS_CALENDAR;
-	$modversion['sub'][$i]['url'] = "calendar.php";
+	if (icms_getConfig('events_start_page', 'events') == 0) {
+		$modversion['sub'][$i]['name'] = _MI_EVENTS_CALENDAR;
+		$modversion['sub'][$i]['url'] = "calendar.php";
+	} else {
+		$modversion['sub'][$i]['name'] = _MI_EVENTS_LIST;
+		$modversion['sub'][$i]['url'] = "event.php";
+	}				
 
 /** Comments information */
 	$modversion["hasComments"]	= 0;

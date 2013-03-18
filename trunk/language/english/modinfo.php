@@ -27,5 +27,6 @@ define("_MI_EVENTS_UPCOMINGDSC", "Displays forthcoming events");
 
 // Added in V1.01
 define("_MI_EVENTS_CALENDAR", "Calendar");
+define("_MI_EVENTS_LIST", "List");
 define("_MI_EVENTS_START_PAGE", "Select module start page");
 define("_MI_EVENTS_START_PAGE_DSC", "To display a simple event listing by default, select 'event.php', to select a calendar-style display select calendar.php");
