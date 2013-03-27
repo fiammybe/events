@@ -99,7 +99,7 @@ $script .= "});";
 
 
 $icmsTheme->addScript('', array('type' => 'text/javascript'), $script);
-$icmsTpl->assign("events_calendar_path", "<a href='".$modpath."/calendar.php'>"._MD_EVENTS_CALENDAR."</a>");
+$icmsTpl->assign("events_calendar_path", "<a href='".$modPath."/calendar.php'>"._MD_EVENTS_CALENDAR."</a>");
 $icmsTpl->assign("events_page_title", _MD_EVENTS_CALENDAR);
 $icmsTpl->assign("events_module_home", '<a href="' . $modPath . '/">' . icms::$module->getVar("name") . "</a>");
 $icmsTpl->assign("events_show_breadcrumb", icms::$module->config['show_breadcrumb']);
