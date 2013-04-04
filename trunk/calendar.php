@@ -61,8 +61,8 @@ if($eventObj && !$eventObj->isNew()) {
 	{
 		$newEvent = array(
 			"title" => $eventObj->vars['title']['value']
-			, "start" => date('Y-n-j G:i:s', $eventObj->vars['date']['value'])
-			, "end" => date('Y-n-j G:i:s', $eventObj->vars['end_date']['value'])
+			, "start" => date('Y-m-d G:i:s', $eventObj->vars['date']['value'])
+			, "end" => date('Y-m-d G:i:s', $eventObj->vars['end_date']['value'])
 			, "url" => $modPath . '/event.php?event_id=' . $eventObj->vars['event_id']['value']
 		);
 		$calendar_events[] = $newEvent;
