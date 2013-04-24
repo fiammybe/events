@@ -34,7 +34,7 @@ function events_upcoming_show($options)
 	$criteria->setStart(0);
 	$criteria->setLimit($options[0]);
 	$criteria->setSort('date');
-	$criteria->setOrder('DESC');
+	$criteria->setOrder('ASC');
 	$criteria->add(new icms_db_criteria_Item('online_status', TRUE));
 	$criteria->add(new icms_db_criteria_Item('date', time(), '>'));
 
