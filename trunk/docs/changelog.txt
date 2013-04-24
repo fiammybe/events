@@ -9,3 +9,7 @@ Version 1.01 Final
 - Add start page preference (list view vs calendar view).
 - Add submenu (displays 'calendar' or 'list' depending on the start page preference).
 - Improve date format handling compatibility (Debianus).
+
+Version 1.02 (unreleased)
+=========================
+- Change sort order of upcoming events block to ascending (= next events).
