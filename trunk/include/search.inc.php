@@ -37,13 +37,15 @@ function events_search($queryarray, $andor, $limit, $offset = 0, $userid = 0)
 	
 	// Process the actual events (not the padding)
 	for ($i = 0; $i < $number_to_process; $i++) {
-		$item['image'] = "images/event.png";
-		$item['link'] = $eventsArray[$i]->getItemLink(TRUE);
-		$item['title'] = $eventsArray[$i]->getVar("title");
-		$item['time'] = $eventsArray[$i]->getVar("date", "e");
-		$item['uid'] = $eventsArray[$i]->getVar("creator");
-		$ret[] = $item;
-		unset($item);
+		if (is_object($eventsArray[$i])) { // Required to prevent crashing on profile view
+			$item['image'] = "images/event.png";
+			$item['link'] = $eventsArray[$i]->getItemLink(TRUE);
+			$item['title'] = $eventsArray[$i]->getVar("title");
+			$item['time'] = $eventsArray[$i]->getVar("date", "e");
+			$item['uid'] = $eventsArray[$i]->getVar("creator");
+			$ret[] = $item;
+			unset($item);
+		}
 	}
 	
 	// Restore the padding (required for 'hits' information and pagination controls). The offset

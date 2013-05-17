@@ -14,3 +14,4 @@ Version 1.02 (unreleased)
 =========================
 - Change sort order of upcoming events block to ascending (= next events).
 - Flush module cache (if enabled) when new event is added to keep index page updated.
+- Fix bug in search function that was crashing profile views.
