@@ -218,6 +218,45 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 	}
 	
 	/**
+	 * Flush the cache for the Events module after adding, editing or deleting an event.
+	 * 
+	 * Ensures that the index/block/single view cache is kept updated if caching is enabled.
+	 * 
+	 * @global array $icmsConfig
+	 * @param type $obj 
+	 */
+	protected function clear_cache(& $obj)
+	{
+		global $icmsConfig;
+		$cache_status = $icmsConfig['module_cache'];
+		$module = icms::handler("icms_module")->getByDirname("events", TRUE);
+		$module_id = $module->getVar("mid");
+			
+		// Check if caching is enabled for this module. The cache time is stored in a serialised 
+		// string in config table (module_cache), and is indicated in seconds. Uncached = 0.
+		if ($cache_status[$module_id] > 0)
+		{			
+			// As PHP's exec() function is often disabled for security reasons
+			try 
+			{
+				exec("find " . ICMS_CACHE_PATH . "/" . "events^%2Fmodules%2Fevents%2Fevent.php^* -delete &");
+				exec("find " . ICMS_CACHE_PATH . "/" . "events^%2Fmodules%2Fevents%2Fcalendar.php^* -delete &");
+				exec("find " . ICMS_CACHE_PATH . "/" . "blk_events* -delete &");
+				if (!$obj->isNew())
+				{
+					exec("find " . ICMS_CACHE_PATH . "/" . "events^%2Fmodules%2Fevents%2Fevent.php%3Fevent_id%3D" 
+							. $obj->getVar('event_id', 'e') . "%26* -delete &");
+				}
+				
+			}
+			catch(Exception $e)
+			{
+				$obj->setErrors($e->getMessage());
+			}
+		}		
+	}
+	
+	/**
 	 * Validate data before saving or updating
 	 * @param object $obj 
 	 */
@@ -251,29 +290,19 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 	 * @param Event object $obj
 	 */
 	
-	protected function afterSave(& $obj)
-	{		
-		/**		
-		 * Flush the cache for the Events module after adding a new item. This ensures that the index 
-	     * page is kept updated if module caching is enabled.
-		*/
-		
-		global $icmsConfig;
-		$cache_status = $icmsConfig['module_cache'];
-		$module = icms::handler("icms_module")->getByDirname("events", TRUE);
-		$module_id = $module->getVar("mid");
-		
-		// First check if caching is enabled for this module. The cache time is stored in a serialised 
-		// string in config table (module_cache), and is indicated in seconds. Uncached = 0.
-		if ($cache_status[$module_id] > 0) {
-			// As PHP's exec() function is often disabled for security reasons
-			try {
-				exec("find " . ICMS_CACHE_PATH . "/" . "events* -delete &");
-			} catch(Exception $e) {
-				$obj->setErrors($e->getMessage());
-			}
-		}
-		
+	protected function afterSave(& $obj) {		
+		$this->clear_cache(& $obj);
+		return TRUE;
+	}
+	
+	/**
+	 * Activities to be conducted after an event is deleted
+	 * 
+	 * @global array $icmsConfig
+	 * @param Event object $obj
+	 */
+	protected function afterDelete(& $obj) {
+		$this->clear_cache(& $obj);		
 		return TRUE;
 	}
 }
