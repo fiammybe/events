@@ -33,6 +33,7 @@ class mod_events_Event extends icms_ipf_seo_Object {
 		$this->initCommonVar("counter");
 		$this->initCommonVar("dohtml");
 		$this->initCommonVar("dobr");
+		$this->quickInitVar('type', XOBJ_DTYPE_TXTBOX, TRUE, FALSE, FALSE, 'Event');
 		$this->setControl('creator', 'user');
 		$this->setControl("online_status", "yesno");
 		
