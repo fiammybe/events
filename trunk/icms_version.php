@@ -17,7 +17,7 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
 	"name"						=> _MI_EVENTS_MD_NAME,
-	"version"					=> 1.01,
+	"version"					=> 1.02,
 	"description"				=> _MI_EVENTS_MD_DESC,
 	"author"					=> "Madfish (Simon Wilkinson)",
 	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
@@ -33,9 +33,9 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "1.01",
-	"status"					=> "Final",
-	"date"						=> "4/4/2013",
+	"status_version"			=> "1.02",
+	"status"					=> "BETA",
+	"date"						=> "2/3/2015",
 	"author_word"				=> "",
 	"warning"					=> "",
 
@@ -95,7 +95,7 @@ $modversion['blocks'][1] = array(
   'description' => _MI_EVENTS_UPCOMINGDSC,
   'show_func' => 'events_upcoming_show',
   'edit_func' => 'events_upcoming_edit',
-  'options' => '5|90',
+  'options' => '5|90|0',
   'template' => 'events_upcoming.html');
 
 /** Preferences information */
@@ -103,7 +103,7 @@ $modversion['blocks'][1] = array(
 $start_options = array(0 => 'event.php', 1 => 'calendar.php');
 $start_options = array_flip($start_options);
 
-// Mdule start page
+// Module start page
 $modversion['config'][3] = array(
 	'name' => 'events_start_page',
 	'title' => '_MI_EVENTS_START_PAGE',
@@ -121,6 +121,15 @@ $modversion['config'][] = array(
 	'formtype' => 'yesno',
 	'valuetype' => 'int',
 	'default' => '1');
+
+$modversion['config'][] = array(
+	'name' => 'events_show_tag_select_box',
+	'title' => '_MI_EVENTS_SHOW_TAG_SELECT_BOX',
+	'description' => '_MI_EVENTS_SHOW_TAG_SELECT_BOX_DSC',
+	'formtype' => 'yesno',
+	'valuetype' => 'int',
+	'default' => '0'
+);
 
 // Format the date field (see PHP manual on date() function for format modifiers)
 $modversion['config'][] = array(

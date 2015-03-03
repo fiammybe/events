@@ -32,3 +32,7 @@ define("_AM_EVENTS_EVENT_VIEW", "Event info");
 define("_AM_EVENTS_EVENT_VIEW_DSC", "Here is the info about this event.");
 define("_AM_EVENTS_EVENT_ONLINE", "Event toggled online");
 define("_AM_EVENTS_EVENT_OFFLINE", "Event toggled offline");
+
+// New in V1.02
+define("_AM_EVENTS_FILTER_BY_TAG", "Filter by tag");
+define("_AM_EVENTS_ALL_EVENTS", "-- All --");

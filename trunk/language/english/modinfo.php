@@ -30,3 +30,5 @@ define("_MI_EVENTS_CALENDAR", "Calendar");
 define("_MI_EVENTS_LIST", "List");
 define("_MI_EVENTS_START_PAGE", "Select module start page");
 define("_MI_EVENTS_START_PAGE_DSC", "To display a simple event listing by default, select 'event.php', to select a calendar-style display select calendar.php");
+define("_MI_EVENTS_SHOW_TAG_SELECT_BOX", "Display tag select box?");
+define("_MI_EVENTS_SHOW_TAG_SELECT_BOX_DSC", "Allows module content to be filtered by tag. Only if Sprockets module is installed");

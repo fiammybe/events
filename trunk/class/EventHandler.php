@@ -291,7 +291,22 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 	 */
 	
 	protected function afterSave(& $obj) {		
-		$this->clear_cache(& $obj);
+		$this->clear_cache($obj);
+		
+		$sprockets_taglink_handler = '';
+        $sprocketsModule = icms::handler("icms_module")->getByDirname("sprockets");
+         
+		// Only update the taglinks if the object is being updated from the add/edit form (POST).
+		// Database updates are not permitted from GET requests and will trigger an error
+		if ($_SERVER['REQUEST_METHOD'] == 'POST' && icms_get_module_status("sprockets")) {
+		   $sprockets_taglink_handler = icms_getModuleHandler('taglink',
+					$sprocketsModule->getVar('dirname'), $sprocketsModule->getVar('dirname'), 
+					'sprockets');
+
+		   // Store tags
+		   $sprockets_taglink_handler->storeTagsForObject($obj, 'tag', '0');
+		}
+		  
 		return TRUE;
 	}
 	
@@ -302,7 +317,19 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 	 * @param Event object $obj
 	 */
 	protected function afterDelete(& $obj) {
-		$this->clear_cache(& $obj);		
+		$this->clear_cache($obj);
+		
+		$sprocketsModule = $notification_handler = $module_handler = $module = $module_id
+				= $tag= $item_id = '';
+		$sprocketsModule = icms_getModuleInfo('sprockets');
+
+		// Delete taglinks
+		if (icms_get_module_status("sprockets")) {
+		   $sprockets_taglink_handler = icms_getModuleHandler('taglink',
+					 $sprocketsModule->getVar('dirname'), 'sprockets');
+		   $sprockets_taglink_handler->deleteAllForObject($obj);
+		}
+		  
 		return TRUE;
 	}
 }

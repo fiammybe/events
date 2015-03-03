@@ -15,3 +15,10 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 // Upcoming events block
 define("_MB_EVENTS_EVENT_UPCOMING_LIMIT", "Number of upcoming events to display: ");
 define("_MB_EVENTS_EVENT_TITLE_LENGTH", "Limit title length: ");
+
+// New in V1.02
+define("_MB_EVENTS_ALL_TAGS", "-- All --");
+define("_MB_EVENTS_FILTER_BY_TAG", "Filter by tag");
+define("_MB_EVENTS_DYNAMIC_TAG", "Dynamic tag filtering? (Overrides static tag filter).");
+define("_MB_EVENTS_EVENT_YES", "Yes");
+define("_MB_EVENTS_EVENT_NO", "No");

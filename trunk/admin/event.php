@@ -23,6 +23,7 @@ function editevent($event_id = 0) {
 	$eventObj = $events_event_handler->get($event_id);
 
 	if (!$eventObj->isNew()){
+		$eventObj->loadTags();
 		$icmsModule->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > " . _CO_ICMS_EDITING);
 		$sform = $eventObj->getForm(_AM_EVENTS_EVENT_EDIT, "addevent");
 		$sform->assign($icmsAdminTpl);
@@ -37,28 +38,25 @@ function editevent($event_id = 0) {
 
 include_once "admin_header.php";
 
-$events_event_handler = icms_getModuleHandler("event", basename(dirname(dirname(__FILE__))), "events");
-
-/** Use a naming convention that indicates the source of the content of the variable */
+$events_event_handler = icms_getModuleHandler("event", "events", "events");
 $clean_op = "";
 
 /** Create a whitelist of valid values, be sure to use appropriate types for each value
- * Be sure to include a value for no parameter, if you have a default condition
- */
+ * Be sure to include a value for no parameter, if you have a default condition */
 $valid_op = array ("mod", "changedField", "addevent", "del", "view", "changeStatus", "");
-
 if (isset($_GET["op"])) $clean_op = htmlentities($_GET["op"]);
 if (isset($_POST["op"])) $clean_op = htmlentities($_POST["op"]);
 
-/** Again, use a naming convention that indicates the source of the content of the variable */
+// Sanitise input parameters
 $clean_event_id = isset($_GET["event_id"]) ? (int)$_GET["event_id"] : 0 ;
+$untagged_content = FALSE;
+if (isset($_GET['tag_id'])) {
+	if ($_GET['tag_id'] == 'untagged') {
+		$untagged_content = TRUE;
+	}
+}
+$clean_tag_id = isset($_GET['tag_id']) ? (int)$_GET['tag_id'] : 0 ;
 
-/**
- * in_array() is a native PHP function that will determine if the value of the
- * first argument is found in the array listed in the second argument. Strings
- * are case sensitive and the 3rd argument determines whether type matching is
- * required
-*/
 if (in_array($clean_op, $valid_op, TRUE)) {
 	switch ($clean_op) {
 		case "mod":
@@ -96,7 +94,58 @@ if (in_array($clean_op, $valid_op, TRUE)) {
 		default:
 			icms_cp_header();
 			$icmsModule->displayAdminMenu(0, _AM_EVENTS_EVENTS);
-			$objectTable = new icms_ipf_view_Table($events_event_handler);
+					
+			// Display a tag select filter (if the Sprockets module is installed)
+			if (icms_get_module_status("sprockets")) {
+
+				$tag_select_box = '';
+				$taglink_array = $tagged_event_list = array();
+				$sprockets_tag_handler = icms_getModuleHandler('tag', 'sprockets', 'sprockets');
+				$sprockets_taglink_handler = icms_getModuleHandler('taglink', 'sprockets', 'sprockets');
+				
+				if ($untagged_content) {
+				$tag_select_box = $sprockets_tag_handler->getTagSelectBox('event.php', 'untagged',
+					_AM_EVENTS_ALL_EVENTS, FALSE, icms::$module->getVar('mid'),
+						'event', TRUE);
+				} else {
+					$tag_select_box = $sprockets_tag_handler->getTagSelectBox('event.php',
+							$clean_tag_id, _AM_EVENTS_ALL_EVENTS, FALSE,
+							icms::$module->getVar('mid'), 'event', TRUE);
+				}
+				
+				if (!empty($tag_select_box)) {
+					echo '<h3>' . _AM_EVENTS_FILTER_BY_TAG . '</h3>';
+					echo $tag_select_box;
+				}
+
+				if ($untagged_content || $clean_tag_id) {
+
+					// get a list of event IDs belonging to this tag
+					$criteria = new icms_db_criteria_Compo();
+					if ($untagged_content) {
+						$criteria->add(new icms_db_criteria_Item('tid', 0));
+					} else {
+						$criteria->add(new icms_db_criteria_Item('tid', $clean_tag_id));
+					}
+					$criteria->add(new icms_db_criteria_Item('mid', icms::$module->getVar('mid')));
+					$criteria->add(new icms_db_criteria_Item('item', 'event'));
+					$taglink_array = $sprockets_taglink_handler->getObjects($criteria);
+					foreach ($taglink_array as $taglink) {
+						$tagged_event_list[] = $taglink->getVar('iid');
+					}
+					$tagged_event_list = "('" . implode("','", $tagged_event_list) . "')";
+
+					// Use the list to filter the persistable table
+					$criteria = new icms_db_criteria_Compo();
+					$criteria->add(new icms_db_criteria_Item('event_id', $tagged_event_list, 'IN'));
+				}
+			}
+			
+			if (empty($criteria)) {
+				$criteria = null;
+			}
+			
+			$objectTable = new icms_ipf_view_Table($events_event_handler, $criteria);
 			$objectTable->addQuickSearch("title");
 			$objectTable->addColumn(new icms_ipf_view_Column("online_status"));
 			$objectTable->addColumn(new icms_ipf_view_Column("title"));
