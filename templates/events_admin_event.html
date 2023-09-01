@@ -1,0 +1,4 @@
+<{if $events_event_title}><h1><{$events_event_title}></h1><{/if}>
+<{if $events_event_info}><p><{$events_event_info}></p><{/if}>
+<{if $events_event_table}><{$events_event_table}><{/if}>
+<{if $addevent}><{includeq file='db:system_common_form.html' form=$addevent}><{/if}>
