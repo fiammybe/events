@@ -18,17 +18,17 @@
  * @param int $event_id Eventid to be edited
 */
 function editevent($event_id = 0) {
-	global $events_event_handler, $icmsModule, $icmsAdminTpl;
+	global $events_event_handler, $icmsAdminTpl;
 
 	$eventObj = $events_event_handler->get($event_id);
 
 	if (!$eventObj->isNew()){
 		$eventObj->loadTags();
-		$icmsModule->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > " . _CO_ICMS_EDITING);
+        icms::$module->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > " . _CO_ICMS_EDITING);
 		$sform = $eventObj->getForm(_AM_EVENTS_EVENT_EDIT, "addevent");
 		$sform->assign($icmsAdminTpl);
 	} else {
-		$icmsModule->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > " . _CO_ICMS_CREATINGNEW);
+        icms::$module->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > " . _CO_ICMS_CREATINGNEW);
 		$sform = $eventObj->getForm(_AM_EVENTS_EVENT_CREATE, "addevent");
 		$sform->assign($icmsAdminTpl);
 
@@ -93,7 +93,7 @@ if (in_array($clean_op, $valid_op, TRUE)) {
 
 		default:
 			icms_cp_header();
-			$icmsModule->displayAdminMenu(0, _AM_EVENTS_EVENTS);
+			icms::$module->displayAdminMenu(0, _AM_EVENTS_EVENTS);
 					
 			// Display a tag select filter (if the Sprockets module is installed)
 			if (icms_get_module_status("sprockets")) {
