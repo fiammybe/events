@@ -57,7 +57,21 @@ class mod_events_Event extends icms_ipf_seo_Object {
 			'method' => 'getCategoryOptions',
 			'module' => 'sprockets'));
 		}
-		else 
+		elseif (icms_get_module_status("imtagging"))
+        {
+//            $this->setControl('tag',array(
+//                'name' => 'selectmulti',
+//                'itemHandler' => 'tag',
+//                'method' => 'getTags',
+//                'module' => 'imtagging' ));
+
+            $this->setControl('category', array(
+                'name' => 'selectmulti',
+                'itemHandler' => 'category',
+                'method' => 'getCategoryName',
+                'module' => 'imtagging'));
+        }
+        else
 		{
 			$this->hideFieldFromForm('tag');
 			$this->hideFieldFromSingleView ('tag');
