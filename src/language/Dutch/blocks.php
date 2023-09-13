@@ -13,12 +13,12 @@
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
 // Upcoming events block
-define("_MB_EVENTS_EVENT_UPCOMING_LIMIT", "Number of upcoming events to display: ");
-define("_MB_EVENTS_EVENT_TITLE_LENGTH", "Limit title length: ");
+define("_MB_EVENTS_EVENT_UPCOMING_LIMIT", "Aantal aankomende evenementen om weer te geven: ");
+define("_MB_EVENTS_EVENT_TITLE_LENGTH", "Maximale titel lengte: ");
 
 // New in V1.02
-define("_MB_EVENTS_ALL_TAGS", "-- All --");
-define("_MB_EVENTS_FILTER_BY_TAG", "Filter by tag");
-define("_MB_EVENTS_DYNAMIC_TAG", "Dynamic tag filtering? (Overrides static tag filter).");
-define("_MB_EVENTS_EVENT_YES", "Yes");
-define("_MB_EVENTS_EVENT_NO", "No");
+define("_MB_EVENTS_ALL_TAGS", "-- Alles --");
+define("_MB_EVENTS_FILTER_BY_TAG", "Filteren op tag");
+define("_MB_EVENTS_DYNAMIC_TAG", "Dynamische filteren op tag? (Overschrijft statische tag filter).");
+define("_MB_EVENTS_EVENT_YES", "Ja");
+define("_MB_EVENTS_EVENT_NO", "Neen");
