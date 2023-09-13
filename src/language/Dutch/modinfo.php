@@ -12,23 +12,23 @@
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
-define("_MI_EVENTS_MD_NAME", "Events");
+define("_MI_EVENTS_MD_NAME", "Evenementen");
 define("_MI_EVENTS_MD_DESC", "ImpressCMS Simple Events");
-define("_MI_EVENTS_EVENTS", "Events");
-define("_MI_EVENTS_SHOW_BREADCRUMB", "Show breadcrumb?");
-define("_MI_EVENTS_SHOW_BREADCRUMB_DSC", "Toggles the breadcrumb navigation strip on and off.");
-define("_MI_EVENTS_TEMPLATES", "Templates");
-define("_MI_EVENTS_DATE_FORMAT", "Date format");
-define("_MI_EVENTS_DATE_FORMAT_DSC", "Specify the date format (see the date() function in the PHP manual for modifier codes).");
+define("_MI_EVENTS_EVENTS", "Evenementen");
+define("_MI_EVENTS_SHOW_BREADCRUMB", "Toon broodkruimel?");
+define("_MI_EVENTS_SHOW_BREADCRUMB_DSC", "Schakelt de broodkruimel navigatiestrook aan en uit.");
+define("_MI_EVENTS_TEMPLATES", "Sjablonen");
+define("_MI_EVENTS_DATE_FORMAT", "Datum formaat");
+define("_MI_EVENTS_DATE_FORMAT_DSC", "Geef het datumformaat op (zie de date() functie in de PHP handleiding voor modifier codes).");
 
 // Blocks
-define("_MI_EVENTS_UPCOMING", "Upcoming events");
-define("_MI_EVENTS_UPCOMINGDSC", "Displays forthcoming events");
+define("_MI_EVENTS_UPCOMING", "Aankomende evenementen");
+define("_MI_EVENTS_UPCOMINGDSC", "Toont toekomstige evenementen");
 
 // Added in V1.01
-define("_MI_EVENTS_CALENDAR", "Calendar");
-define("_MI_EVENTS_LIST", "List");
-define("_MI_EVENTS_START_PAGE", "Select module start page");
-define("_MI_EVENTS_START_PAGE_DSC", "To display a simple event listing by default, select 'event.php', to select a calendar-style display select calendar.php");
-define("_MI_EVENTS_SHOW_TAG_SELECT_BOX", "Display tag select box?");
-define("_MI_EVENTS_SHOW_TAG_SELECT_BOX_DSC", "Allows module content to be filtered by tag. Only if Sprockets module is installed");
+define("_MI_EVENTS_CALENDAR", "Kalender");
+define("_MI_EVENTS_LIST", "Overzicht");
+define("_MI_EVENTS_START_PAGE", "Selecteer de startpagina van module");
+define("_MI_EVENTS_START_PAGE_DSC", "Om evenementen lijst standaard weer te geven, selecteer 'event.php', om een agenda-stijl te selecteren selecteer kalender.php");
+define("_MI_EVENTS_SHOW_TAG_SELECT_BOX", "Tag selectievak weergeven?");
+define("_MI_EVENTS_SHOW_TAG_SELECT_BOX_DSC", "Hiermee kan de moduleinhoud worden gefilterd op tag. Werkt enkel wanneer de prockets module is geïnstalleerd");
