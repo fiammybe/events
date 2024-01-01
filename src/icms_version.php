@@ -17,7 +17,7 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
 	"name"						=> _MI_EVENTS_MD_NAME,
-	"version"					=> 1.02,
+	"version"					=> "2.00",
 	"description"				=> _MI_EVENTS_MD_DESC,
 	"author"					=> "Madfish (Simon Wilkinson)",
 	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
@@ -33,9 +33,9 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "1.02",
+	"status_version"			=> "2.00",
 	"status"					=> "BETA",
-	"date"						=> "2/3/2015",
+	"date"						=> "17/10/2023",
 	"author_word"				=> "",
 	"warning"					=> "",
 
@@ -83,6 +83,7 @@ $modversion["tables"] = icms_getTablesArray($modversion['dirname'], $modversion[
 $modversion['templates'] = array(
 	array("file" => "events_admin_event.html", "description" => "Event admin index"),
 	array("file" => "events_event.html", "description" => "Event index"),
+	array("file" => "events_pastevent.html", "description" => "List of past events"),
 	array("file" => "events_calendar.html", "description" => "Event Calendar"),
 	array("file" => "events_requirements.html", "description" => "Event requirements"),
 	array("file" => "events_header.html", "description" => "Module header"),
@@ -97,6 +98,14 @@ $modversion['blocks'][1] = array(
   'edit_func' => 'events_upcoming_edit',
   'options' => '5|90|0',
   'template' => 'events_upcoming.html');
+$modversion['blocks'][2] = array(
+  'file' => 'events_upcoming.php',
+  'name' => _MI_EVENTS_UPCOMING_MENU,
+  'description' => _MI_EVENTS_UPCOMING_MENUDSC,
+  'show_func' => 'events_upcoming_menu_show',
+  'edit_func' => 'events_upcoming_menu_edit',
+  'options' => '5|90|0',
+  'template' => 'events_upcoming_menu.html');
 
 /** Preferences information */
 
