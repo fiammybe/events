@@ -24,12 +24,16 @@ class mod_events_Event extends icms_ipf_seo_Object {
 		$this->quickInitVar("event_id", XOBJ_DTYPE_INT, TRUE);
 		$this->quickInitVar("title", XOBJ_DTYPE_TXTBOX, TRUE);
 		$this->quickInitVar("date", XOBJ_DTYPE_LTIME, TRUE); // Starting date of event
-		$this->quickInitVar("end_date", XOBJ_DTYPE_LTIME, TRUE);
+		$this->quickInitVar("end_date", XOBJ_DTYPE_LTIME, false);
 		$this->initNonPersistableVar('tag', XOBJ_DTYPE_INT, 'tag', FALSE, FALSE, FALSE, TRUE);
 		$this->quickInitVar("description", XOBJ_DTYPE_TXTAREA, FALSE);
 		$this->quickInitVar("coverage", XOBJ_DTYPE_TXTBOX, TRUE); // Location
 		$this->quickInitVar("identifier", XOBJ_DTYPE_TXTBOX, FALSE); // Official event website
 		$this->quickInitVar("image", XOBJ_DTYPE_IMAGE, FALSE);
+		$this->quickInitVar("promoimage1", XOBJ_DTYPE_IMAGE, FALSE);
+		$this->quickInitVar("promoimage2", XOBJ_DTYPE_IMAGE, FALSE);
+		$this->quickInitVar("promoimage3", XOBJ_DTYPE_IMAGE, FALSE);
+		$this->quickInitVar("promoimage4", XOBJ_DTYPE_IMAGE, FALSE);
 		$this->quickInitVar("creator", XOBJ_DTYPE_INT, TRUE); // Submitter
 		$this->quickInitVar("online_status", XOBJ_DTYPE_INT, TRUE, FALSE, FALSE, 1); // Toggles on or offline
 		$this->quickInitVar('type', XOBJ_DTYPE_TXTBOX, TRUE, FALSE, FALSE, 'Event'); // Internal admin purposes only
@@ -38,7 +42,13 @@ class mod_events_Event extends icms_ipf_seo_Object {
 		$this->initCommonVar("dobr");
 		
 		// Set controls
-		$this->setControl('image', 'imageupload');
+        $this->setControl('description', 'dhtmltextarea');
+        // image path
+        $this->setControl('image', array('name' => 'image'));
+        $this->setControl('promoimage1', 'image');
+        $this->setControl('promoimage2', 'image');
+        $this->setControl('promoimage3', 'image');
+        $this->setControl('promoimage4', array('name' => 'image', 'extra' => 'multiple'));
 		$this->setControl('creator', 'user');
 		$this->setControl("online_status", "yesno");
 		
@@ -69,8 +79,8 @@ class mod_events_Event extends icms_ipf_seo_Object {
 		
 		// The image field has been added for Sprockets compatibility reasons, but is not currently
 		// in use, therefore it will remain hidden until the functionality is implemented
-		$this->hideFieldFromForm('image');
-		$this->hideFieldFromSingleView('image');
+	//	$this->hideFieldFromForm('image');
+	//	$this->hideFieldFromSingleView('image');
 		
 		$this->initiateSEO();
 	}
@@ -89,7 +99,25 @@ class mod_events_Event extends icms_ipf_seo_Object {
 		}
 		return parent::getVar($key, $format);
 	}
-	
+
+    /**
+     * Returns an image tag to display the lead image for this article
+     *
+     * @return string
+     */
+    public function get_image_tag() {
+
+        $image = $image_tag = '';
+
+        $image = $this->getVar('image', 'e');
+        if (!empty($image)) {
+            $image_tag = '/uploads/' . basename(dirname(dirname(__FILE__))) . '/article/'
+                . $image;
+        }
+
+        return $image_tag;
+    }
+
 	/*
      * Converts user id to human readable user name
 	*/
