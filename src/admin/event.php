@@ -30,10 +30,11 @@ function editevent($event_id = 0, $clone = false) {
 	} elseif (!$eventObj->isNew() && $clone) {
         $eventObj->setVar('event_id',0);
         $eventObj->setVar('counter',0);
-        $eventObj->setVar('online_status');
+        $eventObj->setVar('online_status',0);
         $eventObj->setNew();
         icms::$module->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > Clone");
-        $eventObj->getForm(_AM_EVENTS_EVENT_CLONE,"addevent");
+        $sform = $eventObj->getForm(_AM_EVENTS_EVENT_CREATE,"addevent");
+        $sform->assign($icmsAdminTpl);
 	} else {
         icms::$module->displayAdminMenu(0, _AM_EVENTS_EVENTS . " > " . _CO_ICMS_CREATINGNEW);
 		$sform = $eventObj->getForm(_AM_EVENTS_EVENT_CREATE, "addevent");
@@ -66,15 +67,19 @@ $clean_tag_id = isset($_GET['tag_id']) ? (int)$_GET['tag_id'] : 0 ;
 
 if (in_array($clean_op, $valid_op, TRUE)) {
 	switch ($clean_op) {
-		case "mod":
+        case "clone":
+            icms_cp_header();
+            editevent($clean_event_id, true);
+            break;
+        case "mod":
 		case "changedField":
 			icms_cp_header();
-			editevent($clean_event_id);
+			editevent($clean_event_id,false);
 			break;
 
 		case "changeStatus":
 			$status = $events_event_handler->changeStatus($clean_event_id, 'online_status');
-			$ret = '/modules/' . basename(dirname(dirname(__FILE__))) . '/admin/event.php';
+			$ret = '/modules/' . basename(dirname(__FILE__, 2)) . '/admin/event.php';
 			if ($status == 0) {
 				redirect_header(ICMS_URL . $ret, 2, _AM_EVENTS_EVENT_OFFLINE);
 			} else {
@@ -159,6 +164,7 @@ if (in_array($clean_op, $valid_op, TRUE)) {
 			$objectTable->addColumn(new icms_ipf_view_Column("coverage"));
 			$objectTable->addColumn(new icms_ipf_view_Column("date"));
 			$objectTable->addColumn(new icms_ipf_view_Column("end_date"));
+            $objectTable->addCustomAction('getCloneItemLink');
 			$objectTable->setDefaultSort('date');
 			$objectTable->setDefaultOrder('DESC');
 			$objectTable->addFilter('online_status', 'online_status_filter');
