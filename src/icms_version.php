@@ -17,10 +17,10 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
 	"name"						=> _MI_EVENTS_MD_NAME,
-	"version"					=> "2.00",
+	"version"					=> "2.01",
 	"description"				=> _MI_EVENTS_MD_DESC,
-	"author"					=> "Madfish (Simon Wilkinson)",
-	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
+	"author"					=> "fiammybe (David Janssens)",
+	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/. Previous versions by MadFish (Simon Wilkinson)",
 	"help"						=> "",
 	"license"					=> "GNU General Public License (GPL)",
 	"official"					=> 0,
@@ -33,16 +33,16 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "2.00",
+	"status_version"			=> "2.01",
 	"status"					=> "BETA",
-	"date"						=> "17/10/2023",
+	"date"						=> "19/03/2024",
 	"author_word"				=> "",
 	"warning"					=> "",
 
 /** Contributors */
-	"developer_website_url"		=> "https://www.isengard.biz",
-	"developer_website_name"	=> "Isengard.biz",
-	"developer_email"			=> "simon@isengard.biz",
+	"developer_website_url"		=> "https://www.davidjanssens.be",
+	"developer_website_name"	=> "Davidjanssens.be",
+	"developer_email"			=> "david.j@impresscms.org",
 
 /** Administrative information */
 	"hasAdmin"					=> 1,
@@ -66,13 +66,13 @@ $modversion = array(
 	} else {
 		$modversion['sub'][$i]['name'] = _MI_EVENTS_LIST;
 		$modversion['sub'][$i]['url'] = "event.php";
-	}				
+	}
 
 /** Comments information */
 	$modversion["hasComments"]	= 0;
 
 /** other possible types: testers, translators, documenters and other */
-$modversion['people']['developers'][] = "Madfish (Simon Wilkinson)";
+$modversion['people']['developers'][] = "fiammybe (David Janssens)";
 
 /** Database information */
 $modversion['object_items'][1] = 'event';
@@ -151,6 +151,3 @@ $modversion['config'][] = array(
 
 // Comments information
 $modversion['hasComments'] = 0;
-
-/** Notification information */
-/** To come soon in imBuilding... */
