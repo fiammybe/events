@@ -21,6 +21,9 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 	public function __construct(&$db) {
 		parent::__construct($db, "event", "event_id", "title", "description", "events");
 
+        $mimetypes = array('image/jpeg', 'image/png', 'image/gif', 'image/webp');
+        //TODO make this work with icms_getConfig
+        $this->enableUpload($mimetypes, 5000000, 2500, 2500);
 	}
 
 	/**
@@ -36,10 +39,17 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 		// Format date. Check the month of each. Are they the same?
 		if (date('n', $start_date) == date('n', $end_date))
 		{
+            if (date('d', $start_date) == date('d', $end_date))
+            {
+                $event['formatted_date'] = date('j F y', $start_date);
+            }
+            else
+            {
 			// If so, format using the start month once, eg. 1-3 January
 			$event['formatted_date'] = date('j', $start_date) . '-' . date ('j', $end_date) . ' ' 
 					. date('F', $start_date);
-		}
+		    }
+        }
 		else
 		{
 			// If not, then specify using both the start/end months
@@ -65,13 +75,13 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 			$description = $eventObj->getVar('description', 'e');
 			if (!empty($description))
 			{
-				$event['title'] = '<a href="' . $event['itemUrl'];
-				if (!empty($short_url))
-				{
-					$event['title'] .= '&amp;title=' . $short_url; 
-				}						
-				$event['title'] .= '">' . $title . ', ' . $event['coverage'] . ', '
-				. $event['formatted_date'] .'</a>';
+//				$event['title'] = '<a href="' . $event['itemUrl'];
+//				if (!empty($short_url))
+//				{
+//					$event['title'] .= '&amp;title=' . $short_url;
+//				}
+//				$event['title'] .= '">' . $title . ', ' . $event['coverage'] . ', '
+//				. $event['formatted_date'] .'</a>';
 			}
 			else
 			{

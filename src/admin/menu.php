@@ -16,7 +16,7 @@ $adminmenu[] = array(
 	"title" => _MI_EVENTS_EVENTS,
 	"link" => "admin/event.php");
 
-$module = icms::handler("icms_module")->getByDirname(basename(dirname(dirname(__FILE__))));
+$module = icms::handler("icms_module")->getByDirname(basename(dirname(__FILE__, 2)));
 
 $headermenu[] = array(
 	"title" => _PREFERENCES,
@@ -27,10 +27,10 @@ $headermenu[] = array(
 $headermenu[] = array(
 	"title" => _MI_EVENTS_TEMPLATES,
 	"link" => "../../system/admin.php?fct=tplsets&op=listtpl&tplset="
-		. $icmsConfig['template_set'] . "&moddir=" . basename(dirname(dirname(__FILE__))));
+		. $icmsConfig['template_set'] . "&moddir=" . basename(dirname(__FILE__, 2)));
 $headermenu[] = array(
 	"title" => _CO_ICMS_UPDATE_MODULE,
-	"link" => ICMS_URL . "/modules/system/admin.php?fct=modulesadmin&amp;op=update&amp;module=" . basename(dirname(dirname(__FILE__))));
+	"link" => ICMS_URL . "/modules/system/admin.php?fct=modulesadmin&amp;op=update&amp;module=" . basename(dirname(__FILE__, 2)));
 $headermenu[] = array(
 	"title" => _MODABOUT_ABOUT,
 	"link" => ICMS_URL . "/modules/events/admin/about.php");

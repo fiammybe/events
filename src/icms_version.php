@@ -17,10 +17,10 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
 	"name"						=> _MI_EVENTS_MD_NAME,
-	"version"					=> 1.02,
+	"version"					=> "2.01",
 	"description"				=> _MI_EVENTS_MD_DESC,
-	"author"					=> "Madfish (Simon Wilkinson)",
-	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
+	"author"					=> "fiammybe (David Janssens)",
+	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/. Previous versions by MadFish (Simon Wilkinson)",
 	"help"						=> "",
 	"license"					=> "GNU General Public License (GPL)",
 	"official"					=> 0,
@@ -33,16 +33,16 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "1.02",
+	"status_version"			=> "2.01",
 	"status"					=> "BETA",
-	"date"						=> "2/3/2015",
+	"date"						=> "19/03/2024",
 	"author_word"				=> "",
 	"warning"					=> "",
 
 /** Contributors */
-	"developer_website_url"		=> "https://www.isengard.biz",
-	"developer_website_name"	=> "Isengard.biz",
-	"developer_email"			=> "simon@isengard.biz",
+	"developer_website_url"		=> "https://www.davidjanssens.be",
+	"developer_website_name"	=> "Davidjanssens.be",
+	"developer_email"			=> "david.j@impresscms.org",
 
 /** Administrative information */
 	"hasAdmin"					=> 1,
@@ -66,13 +66,13 @@ $modversion = array(
 	} else {
 		$modversion['sub'][$i]['name'] = _MI_EVENTS_LIST;
 		$modversion['sub'][$i]['url'] = "event.php";
-	}				
+	}
 
 /** Comments information */
 	$modversion["hasComments"]	= 0;
 
 /** other possible types: testers, translators, documenters and other */
-$modversion['people']['developers'][] = "Madfish (Simon Wilkinson)";
+$modversion['people']['developers'][] = "fiammybe (David Janssens)";
 
 /** Database information */
 $modversion['object_items'][1] = 'event';
@@ -83,6 +83,7 @@ $modversion["tables"] = icms_getTablesArray($modversion['dirname'], $modversion[
 $modversion['templates'] = array(
 	array("file" => "events_admin_event.html", "description" => "Event admin index"),
 	array("file" => "events_event.html", "description" => "Event index"),
+	array("file" => "events_pastevent.html", "description" => "List of past events"),
 	array("file" => "events_calendar.html", "description" => "Event Calendar"),
 	array("file" => "events_requirements.html", "description" => "Event requirements"),
 	array("file" => "events_header.html", "description" => "Module header"),
@@ -97,6 +98,14 @@ $modversion['blocks'][1] = array(
   'edit_func' => 'events_upcoming_edit',
   'options' => '5|90|0',
   'template' => 'events_upcoming.html');
+$modversion['blocks'][2] = array(
+  'file' => 'events_upcoming.php',
+  'name' => _MI_EVENTS_UPCOMING_MENU,
+  'description' => _MI_EVENTS_UPCOMING_MENUDSC,
+  'show_func' => 'events_upcoming_menu_show',
+  'edit_func' => 'events_upcoming_menu_edit',
+  'options' => '5|90|0',
+  'template' => 'events_upcoming_menu.html');
 
 /** Preferences information */
 
@@ -142,6 +151,3 @@ $modversion['config'][] = array(
 
 // Comments information
 $modversion['hasComments'] = 0;
-
-/** Notification information */
-/** To come soon in imBuilding... */

@@ -21,7 +21,8 @@ define("_AM_EVENTS_REQUIREMENTS_SUPPORT", "Should you have any question or conce
 // Event
 define("_AM_EVENTS_EVENTS", "Events");
 define("_AM_EVENTS_EVENTS_DSC", "All events in the module");
-define("_AM_EVENTS_EVENT_CREATE", "Add a event");
+define("_AM_EVENTS_EVENT_CREATE", "Add an event");
+define("_AM_EVENTS_EVENT_CLONE", "Clone an event");
 define("_AM_EVENTS_EVENT", "Event");
 define("_AM_EVENTS_EVENT_CREATE_INFO", "Fill-out the following form to create a new event.");
 define("_AM_EVENTS_EVENT_EDIT", "Edit this event");
