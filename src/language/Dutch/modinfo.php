@@ -24,6 +24,10 @@ define("_MI_EVENTS_DATE_FORMAT_DSC", "Geef het datumformaat op (zie de date() fu
 // Blocks
 define("_MI_EVENTS_UPCOMING", "Aankomende evenementen");
 define("_MI_EVENTS_UPCOMINGDSC", "Toont toekomstige evenementen");
+// Since 2.0
+define("_MI_EVENTS_UPCOMING_MENU", "Upcoming events in menu");
+define("_MI_EVENTS_UPCOMING_MENUDSC", "Displays forthcoming events in menu");
+
 
 // Added in V1.01
 define("_MI_EVENTS_CALENDAR", "Kalender");
