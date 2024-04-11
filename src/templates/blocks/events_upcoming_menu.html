@@ -1,0 +1,7 @@
+<div>
+	<ul>
+		<{foreach item=event from=$block.upcoming_events}>
+			<li><{$event.itemLink}> (<{$event.date}>)</li>
+		<{/foreach}>
+	</ul>
+</div>
