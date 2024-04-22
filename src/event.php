@@ -25,6 +25,9 @@ if (isset($_GET['tag_id'])) {
 		$untagged_content = TRUE;
 	}
 }
+
+$clean_period = isset($_GET["period"]) ? $_GET["period"] : 0 ;
+
 $clean_tag_id = isset($_GET['tag_id']) ? (int)trim($_GET['tag_id']) : 0;
 
 // Optional tagging support (only if Sprockets module installed)
@@ -160,7 +163,7 @@ if ($eventObj && !$eventObj->isNew()) {
 	{
 		// Retrieve events without filtering by tag
 		$criteria = new icms_db_criteria_Compo();
-		$criteria->add(new icms_db_criteria_Item('date', $time, '>'));
+		$criteria->add(new icms_db_criteria_Item('date', $time, ($clean_period == 'past') ? '<' : '>';));
 		$criteria->add(new icms_db_criteria_Item('online_status', '1'));
 		$criteria->setSort('date');
 		$criteria->setOrder('ASC');
