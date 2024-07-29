@@ -44,7 +44,7 @@ $eventObj = $events_event_handler->get($clean_event_id);
 ////////// Display single event (only if it has a description field) //////////
 ///////////////////////////////////////////////////////////////////////////////
 if ($eventObj && !$eventObj->isNew()) {
-	
+
 	// Prepare tags for display
 	if (icms_get_module_status("sprockets"))
 	{
@@ -53,7 +53,7 @@ if ($eventObj && !$eventObj->isNew()) {
 				$events_event_handler, 0);
 		foreach ($event_tag_array as $key => $value)
 		{
-			$event_tags[] = '<a href="' . EVENTS_URL . 'event.php?tag_id=' . $value 
+			$event_tags[] = '<a href="' . EVENTS_URL . 'event.php?tag_id=' . $value
 					. '">' . $sprockets_tag_buffer[$value] . '</a>';
 		}
 		$event_tags = implode(', ', $event_tags);
@@ -66,25 +66,25 @@ if ($eventObj && !$eventObj->isNew()) {
 	////////////////////////////////////////////////////////////////////////
 	////////// Display event index page, sorted by year and month //////////
 	////////////////////////////////////////////////////////////////////////
-	
+
 	// Get the current date/time; this is used to filter out expired events
 	$time = time();
-	
+
 	// Optional tagging support (only if Sprockets module installed)
 	if (icms_get_module_status("sprockets"))
 	{
 		// Get a select box (if preferences allow, and only if Sprockets module installed)
-		if (icms::$module->config['events_show_tag_select_box'] == TRUE) {		 
+		if (icms::$module->config['events_show_tag_select_box']) {
 			if ($untagged_content) {
-				$tag_select_box = $sprockets_tag_handler->getTagSelectBox('event.php', 'untagged', 
+				$tag_select_box = $sprockets_tag_handler->getTagSelectBox('event.php', 'untagged',
 					_CO_EVENTS_ALL_TAGS, TRUE, icms::$module->getVar('mid'), 'event', TRUE);
 			} else {
-				$tag_select_box = $sprockets_tag_handler->getTagSelectBox('event.php', $clean_tag_id, 
+				$tag_select_box = $sprockets_tag_handler->getTagSelectBox('event.php', $clean_tag_id,
 					_CO_EVENTS_ALL_TAGS, TRUE, icms::$module->getVar('mid'), 'event', TRUE);
 			}
 			$icmsTpl->assign('events_tag_select_box', $tag_select_box);
 		}
-	
+
 		// Append the tag name to the module title (if preferences allow, and only if Sprockets module installed)
 		if (icms::$module->config['show_breadcrumb'] == FALSE)
 		{
@@ -106,7 +106,7 @@ if ($eventObj && !$eventObj->isNew()) {
 			}
 		}
 	}
-	
+
 	// Get a list of events sorted by tag
 	if (icms_get_module_status("sprockets") && ($clean_tag_id || $untagged_content))
 	{
@@ -132,7 +132,7 @@ if ($eventObj && !$eventObj->isNew()) {
 		else
 		{
 			$rows = $events_event_handler->convertResultSet($result, TRUE, TRUE);
-			foreach ($rows as $key => $row) 
+			foreach ($rows as $key => $row)
 			{
 				$events_event_array[$key] = $row;
 			}
@@ -148,24 +148,24 @@ if ($eventObj && !$eventObj->isNew()) {
 		$criteria->setOrder('ASC');
 		$events_event_array = $events_event_handler->getObjects($criteria, TRUE, TRUE);
 	}
-	
+
 	///////////////////////////////////////////////////////
 	////////// Sort the events by year and month //////////
 	///////////////////////////////////////////////////////
-	
+
 	$sorted_events = array();
-	
+
 	foreach ($events_event_array as $eventObj)
 	{
 		$event = '';
 		$year = date('Y', $eventObj->getVar('date', 'e'));
 		$month = date('F', $eventObj->getVar('date', 'e'));
-		
+
 		// Format the start/end dates for user-side display
 		$event = $events_event_handler->prepareEventForDisplay($eventObj, FALSE);
 		$sorted_events[$year][$month][] = $event;
 	}
-	
+
 	// Assign data to template
 	$icmsTpl->assign("events_title", _MD_EVENTS_ALL_EVENTS);
 	$icmsTpl->assign("events_list", $sorted_events);
