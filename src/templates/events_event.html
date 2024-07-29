@@ -7,7 +7,7 @@
 			<div><{$events_event.description}></div>
 		<{/if}>
 <{else}>
-<{if events_tag_select_box}><{$events_tag_select_box}><{/if}>
+<{if $events_tag_select_box}><{$events_tag_select_box}><{/if}>
 	<{if $events_list}>
 			<{foreach key=yearname item=year from=$events_list}>
 					<h2><{$yearname}></h2>
