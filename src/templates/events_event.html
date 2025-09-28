@@ -1,0 +1,28 @@
+<{includeq file='db:events_header.html'}>
+<div id="events_event_container">
+<{if $events_event}>
+	<h2><{$events_event.title}></h2>
+		<div class="itemInfo events_separator"><p><{$events_event.formatted_date}><{if $events_event.coverage}>, <{$events_event.coverage}><{if $events_event.tag}> | <{$smarty.const._CO_EVENTS_EVENT_TAG}>: <{$events_event.tag}><{/if}><{/if}></p></div>
+		<{if $events_event.description}>
+			<div><{$events_event.description}></div>
+		<{/if}>
+<{else}>
+<{if $events_tag_select_box}><{$events_tag_select_box}><{/if}>
+	<{if $events_list}>
+			<{foreach key=yearname item=year from=$events_list}>
+					<h2><{$yearname}></h2>
+					<{foreach key=monthname item=month from=$year}>
+						<h3><{$monthname}></h3>
+						<ul>
+							<{foreach item=event from=$month}>
+								<li>
+									<{$event.title}>
+								</li>
+							<{/foreach}>
+						</ul>
+					<{/foreach}>
+			<{/foreach}>
+	<{/if}>
+<{/if}>
+</div>
+<{includeq file='db:events_footer.html'}>
