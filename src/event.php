@@ -25,6 +25,9 @@ if (isset($_GET['tag_id'])) {
 		$untagged_content = TRUE;
 	}
 }
+
+$clean_period = isset($_GET["period"]) ? $_GET["period"] : 0 ;
+
 $clean_tag_id = isset($_GET['tag_id']) ? (int)trim($_GET['tag_id']) : 0;
 
 // Optional tagging support (only if Sprockets module installed)
@@ -62,6 +65,24 @@ if ($eventObj && !$eventObj->isNew()) {
 	$icmsTpl->assign("events_event", $events_event_handler->prepareEventForDisplay($eventObj, TRUE));
 	$icms_metagen = new icms_ipf_Metagen($eventObj->getVar("title"), $eventObj->getVar("meta_keywords", "n"), $eventObj->getVar("meta_description", "n"));
 	$icms_metagen->createMetaTags();
+    /**
+     * OpenGraph tags for Facebook
+     */
+    $xoTheme->addMeta('meta','og:title',$eventObj->getVar('title'));
+    $xoTheme->addMeta('meta','og:type','article');
+    $xoTheme->addMeta('meta','og:description',$eventObj->getVar('description'));
+    if ($eventObj->getVar('image')) {
+        $xoTheme->addMeta('meta', 'og:image',ICMS_URL . '/uploads/' . basename(dirname(__FILE__, 1)) . '/article/' . $eventObj->getVar('image'));
+    }
+    /**
+     * Twitter Cards tags
+     */
+    $xoTheme->addMeta('meta','twitter:card','summary');
+    $xoTheme->addMeta('meta','twitter:title',$eventObj->getVar('title'));
+    $xoTheme->addMeta('meta','twitter:description',$eventObj->getVar('description'));
+    if ($eventObj->getVar('image')) {
+        $xoTheme->addMeta('meta', 'twitter:image',ICMS_URL . '/uploads/' . basename(dirname(__FILE__, 1)) . '/article/' . $eventObj->getVar('image'));
+    }
 } else {
 	////////////////////////////////////////////////////////////////////////
 	////////// Display event index page, sorted by year and month //////////
@@ -142,7 +163,7 @@ if ($eventObj && !$eventObj->isNew()) {
 	{
 		// Retrieve events without filtering by tag
 		$criteria = new icms_db_criteria_Compo();
-		$criteria->add(new icms_db_criteria_Item('date', $time, '>'));
+		$criteria->add(new icms_db_criteria_Item('date', $time, ($clean_period == 'past') ? '<' : '>';));
 		$criteria->add(new icms_db_criteria_Item('online_status', '1'));
 		$criteria->setSort('date');
 		$criteria->setOrder('ASC');

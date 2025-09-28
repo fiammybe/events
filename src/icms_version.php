@@ -17,10 +17,10 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
 	"name"						=> _MI_EVENTS_MD_NAME,
-	"version"					=> 1.02,
+	"version"					=> '1.1',
 	"description"				=> _MI_EVENTS_MD_DESC,
-	"author"					=> "Madfish (Simon Wilkinson)",
-	"credits"					=> "Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
+	"author"					=> "fiammybe (David Janssens)",
+	"credits"					=> "Madfish (Simon Wilkinson), Thanks to Will for adding the calendar page/functionality. Logo by lopagof (Creative Commons Attribution Non-Commercial): http://lopagof.deviantart.com/",
 	"help"						=> "",
 	"license"					=> "GNU General Public License (GPL)",
 	"official"					=> 0,
@@ -33,16 +33,16 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "1.02",
-	"status"					=> "BETA",
-	"date"						=> "2/3/2015",
+	"status_version"			=> "1.1",
+	"status"					=> "RC",
+	"date"						=> "29 Jul 2024",
 	"author_word"				=> "",
-	"warning"					=> "",
+	"warning"					=> _CO_ICMS_WARNING_RC,
 
 /** Contributors */
-	"developer_website_url"		=> "https://www.isengard.biz",
-	"developer_website_name"	=> "Isengard.biz",
-	"developer_email"			=> "simon@isengard.biz",
+	"developer_website_url"		=> "https://github.com/fiammybe/events",
+	"developer_website_name"	=> "Github",
+	"developer_email"			=> "david.j@impresscms.org",
 
 /** Administrative information */
 	"hasAdmin"					=> 1,
@@ -66,12 +66,13 @@ $modversion = array(
 	} else {
 		$modversion['sub'][$i]['name'] = _MI_EVENTS_LIST;
 		$modversion['sub'][$i]['url'] = "event.php";
-	}				
+	}
 
 /** Comments information */
 	$modversion["hasComments"]	= 0;
 
 /** other possible types: testers, translators, documenters and other */
+$modversion['people']['developers'][] = "fiammybe (David Janssens)";
 $modversion['people']['developers'][] = "Madfish (Simon Wilkinson)";
 
 /** Database information */
