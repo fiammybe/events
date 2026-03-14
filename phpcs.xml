@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="Custom PSR12 Ruleset">
+    <description>PSR-12 standard for ImpressCMS Events module with legacy exceptions</description>
+
+    <!-- Path to check -->
+    <file>src</file>
+
+    <!-- Exclude patterns -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/utils/*</exclude-pattern>
+
+    <!-- Base ruleset -->
+    <rule ref="PSR12"/>
+
+    <!-- Exclusions: avoid breaking legacy public API/naming and allow side-effect files -->
+    <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+    <exclude name="Squiz.Classes.ValidClassName.NotPascalCase"/>
+    <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+    <exclude name="Generic.Files.LineLength.TooLong"/>
+
+    <!-- Use LF line endings and php extension only -->
+    <arg name="extensions" value="php"/>
+</ruleset>

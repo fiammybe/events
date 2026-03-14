@@ -1,0 +1,35 @@
+{
+    "name": "fiammybe/events",
+    "description": "ImpressCMS Events module",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "david",
+            "email": "david.j@impresscms.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "rector/rector": "2.1.7",
+        "pestphp/pest": "v4.1.0",
+        "squizlabs/php_codesniffer": "4.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Utils\\Rector\\": "utils/rector/src",
+            "Utils\\Rector\\Tests\\": "utils/rector/tests"
+        }
+    },
+    "scripts": {
+        "phpcs": "phpcs --standard=phpcs.xml src",
+        "phpcbf": "phpcbf --standard=phpcs.xml src"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
