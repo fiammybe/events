@@ -45,28 +45,30 @@ function events_upcoming_show($options): array
     // Retrieve the next XX events, optionally filtered by tag
     if (icms_get_module_status("sprockets") && ($options[2] != 0 || $untagged_content)) {
         $sprockets_taglink_handler = icms_getModuleHandler('taglink', 'sprockets', 'sprockets');
-        $query = "SELECT * FROM " . $events_event_handler->table . ", "
-            . $sprockets_taglink_handler->table
-            . " WHERE `event_id` = `iid`";
-        if ($untagged_content) {
-            $options[2] = 0;
-        }
 
-        $query .= " AND `tid` = '" . $options[2] . "'"
-            . " AND `mid` = '" . $eventsModule->getVar('mid') . "'"
-            . " AND `item` = 'event'"
-            . " AND `end_date` > '" . time() . "'"
-            . " AND `online_status` = '1'";
-        $query .= " ORDER BY `date` ASC";
-        $result = icms::$xoopsDB->query($query);
-        if (!$result) {
-            echo 'Error: Events block';
-            exit;
-        } else {
-            $rows = $events_event_handler->convertResultSet($result, true, true);
-            foreach ($rows as $key => $row) {
-                $block['upcoming_events'][$key] = $row;
-            }
+        $tagCriteria = new icms_db_criteria_Compo();
+        $tagCriteria->add(new icms_db_criteria_Item('mid', $eventsModule->getVar('mid')));
+        $tagCriteria->add(new icms_db_criteria_Item('item', 'event'));
+        $tagCriteria->add(new icms_db_criteria_Item('tid', $options[2]));
+        $tagCriteria->setSort('iid');
+
+        $taglinks = $sprockets_taglink_handler->getObjects($tagCriteria, true, true);
+        $eventIds = [];
+        foreach ($taglinks as $taglink) {
+            $eventIds[] = (int)$taglink->getVar('iid', 'e');
+        }
+        $eventIds = array_unique($eventIds);
+
+        if (!empty($eventIds)) {
+            $eventCriteria = new icms_db_criteria_Compo();
+            $eventCriteria->setStart(0);
+            $eventCriteria->setLimit($options[0]);
+            $eventCriteria->setSort('date');
+            $eventCriteria->setOrder('ASC');
+            $eventCriteria->add(new icms_db_criteria_Item('online_status', true));
+            $eventCriteria->add(new icms_db_criteria_Item('end_date', time(), '>'));
+            $eventCriteria->add(new icms_db_criteria_Item('event_id', $eventIds, 'IN'));
+            $block['upcoming_events'] = $events_event_handler->getObjects($eventCriteria, true, true);
         }
     } else {
         // Do not filter by tag
@@ -111,11 +113,11 @@ function events_upcoming_show($options): array
             $event['itemLink'] = '<a href="' . $identifier . '">' . $event['title'] . '</a>';
         }
 
-        if (event['promoimage1']) {
+        if ($event['promoimage1']) {
             $promoimage1 = ICMS_URL . '/uploads/events/' . $event['promoimage1'];
         }
 
-        if (event['promoimage2']) {
+        if ($event['promoimage2']) {
             $promoimage2 = ICMS_URL . '/uploads/events/' . $event['promoimage2'];
         }
     }
@@ -221,28 +223,30 @@ function events_upcoming_menu_show($options)
     // Retrieve the next XX events, optionally filtered by tag
     if (icms_get_module_status("sprockets") && ($options[2] != 0 || $untagged_content)) {
         $sprockets_taglink_handler = icms_getModuleHandler('taglink', 'sprockets', 'sprockets');
-        $query = "SELECT * FROM " . $events_event_handler->table . ", "
-            . $sprockets_taglink_handler->table
-            . " WHERE `event_id` = `iid`";
-        if ($untagged_content) {
-            $options[2] = 0;
-        }
 
-        $query .= " AND `tid` = '" . $options[2] . "'"
-            . " AND `mid` = '" . $eventsModule->getVar('mid') . "'"
-            . " AND `item` = 'event'"
-            . " AND `end_date` > '" . time() . "'"
-            . " AND `online_status` = '1'";
-        $query .= " ORDER BY `date` ASC";
-        $result = icms::$xoopsDB->query($query);
-        if (!$result) {
-            echo 'Error: Events block';
-            exit;
-        } else {
-            $rows = $events_event_handler->convertResultSet($result, true, true);
-            foreach ($rows as $key => $row) {
-                $block['upcoming_events'][$key] = $row;
-            }
+        $tagCriteria = new icms_db_criteria_Compo();
+        $tagCriteria->add(new icms_db_criteria_Item('mid', $eventsModule->getVar('mid')));
+        $tagCriteria->add(new icms_db_criteria_Item('item', 'event'));
+        $tagCriteria->add(new icms_db_criteria_Item('tid', $options[2]));
+        $tagCriteria->setSort('iid');
+
+        $taglinks = $sprockets_taglink_handler->getObjects($tagCriteria, true, true);
+        $eventIds = [];
+        foreach ($taglinks as $taglink) {
+            $eventIds[] = (int)$taglink->getVar('iid', 'e');
+        }
+        $eventIds = array_unique($eventIds);
+
+        if (!empty($eventIds)) {
+            $eventCriteria = new icms_db_criteria_Compo();
+            $eventCriteria->setStart(0);
+            $eventCriteria->setLimit($options[0]);
+            $eventCriteria->setSort('date');
+            $eventCriteria->setOrder('ASC');
+            $eventCriteria->add(new icms_db_criteria_Item('online_status', true));
+            $eventCriteria->add(new icms_db_criteria_Item('end_date', time(), '>'));
+            $eventCriteria->add(new icms_db_criteria_Item('event_id', $eventIds, 'IN'));
+            $block['upcoming_events'] = $events_event_handler->getObjects($eventCriteria, true, true);
         }
     } else {
         // Do not filter by tag
