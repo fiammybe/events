@@ -1,13 +1,14 @@
 <?php
+
 /**
  * English language constants commonly used in the module
  *
- * @copyright	Copyright Madfish (Simon Wilkinson) 2013.
- * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
- * @since		1.0
- * @author		Madfish (Simon Wilkinson) <simon@isengard.biz>
- * @package		events
- * @version		$Id$
+ * @copyright    Copyright Madfish (Simon Wilkinson) 2013.
+ * @license        http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @since        1.0
+ * @author        Madfish (Simon Wilkinson) <simon@isengard.biz>
+ * @package        events
+ * @version        $Id$
  */
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
@@ -61,4 +62,4 @@ define("_CO_EVENTS_ALL_TAGS", "-- Alles --");
 define("_CO_EVENTS_UNTAGGED", "Ongetagd");
 define("_CO_EVENTS_EVENT_IMAGE", "Logo");
 define("_CO_EVENTS_EVENT_IMAGE_DSC", "Het logo of afbeelding van de gebeurtenis. Alleen handig voor gebeurtenissen waarbij 
-	× je een volledige beschrijving geeft, anders wordt het niet getoond.");
+    × je een volledige beschrijving geeft, anders wordt het niet getoond.");

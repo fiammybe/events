@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File containing onUpdate and onInstall functions for the module
  *
@@ -12,12 +13,12 @@
  * $modversion['onUpdate'] = "include/onupdate.inc.php";
  * </code>
  *
- * @copyright	Copyright Madfish (Simon Wilkinson) 2013.
- * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
- * @since		1.0
- * @author		Madfish (Simon Wilkinson) <simon@isengard.biz>
- * @package		events
- * @version		$Id$
+ * @copyright    Copyright Madfish (Simon Wilkinson) 2013.
+ * @license        http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @since        1.0
+ * @author        Madfish (Simon Wilkinson) <simon@isengard.biz>
+ * @package        events
+ * @version        $Id$
  */
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
@@ -36,10 +37,12 @@ function events_db_upgrade_2() {
 }
 */
 
-function icms_module_update_events($module) {
-    return TRUE;
+function icms_module_update_events($module)
+{
+    return true;
 }
 
-function icms_module_install_events($module) {
-	return TRUE;
+function icms_module_install_events($module)
+{
+    return true;
 }
