@@ -179,8 +179,8 @@ if ($eventObj && !$eventObj->isNew()) {
 	foreach ($events_event_array as $eventObj)
 	{
 		$event = '';
-		$year = date('Y', $eventObj->getVar('date', 'e'));
-		$month = date('F', $eventObj->getVar('date', 'e'));
+		$year = formatTimestamp($eventObj->getVar('date', 'e'), 'Y');
+		$month = formatTimestamp($eventObj->getVar('date', 'e'), 'F');
 
 		// Format the start/end dates for user-side display
 		$event = $events_event_handler->prepareEventForDisplay($eventObj, FALSE);

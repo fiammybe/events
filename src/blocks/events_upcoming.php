@@ -104,7 +104,7 @@ function events_upcoming_show($options) : array
 		// Formats timestamp according to the block options
 		$date = $event->getVar('date', 'e');
 		$dateformat = icms_getConfig('date_format', 'events');
-		$date = date($dateformat, $date);
+		$date = formatTimestamp($date, 'custom', $dateformat);
 		
 		// Convert to array for template insertion and update fields where required
 		$event = $event->toArray();
@@ -124,8 +124,6 @@ function events_upcoming_show($options) : array
  * @param array ($options
  * @return string
  */
-
-function events_upcoming_edit($options)
 {
 	$eventsModule = icms_getModuleInfo('events');
 	include_once(ICMS_ROOT_PATH . '/modules/' . $eventsModule->getVar('dirname') . '/include/common.php');
@@ -273,7 +271,7 @@ function events_upcoming_edit($options)
 		// Formats timestamp according to the block options
 		$date = $event->getVar('date', 'e');
 		$dateformat = icms_getConfig('date_format', 'events');
-		$date = date($dateformat, $date);
+		$date = formatTimestamp($date, 'custom', $dateformat);
 
 		// Convert to array for template insertion and update fields where required
 		$event = $event->toArray();

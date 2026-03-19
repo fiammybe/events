@@ -37,24 +37,29 @@ class mod_events_EventHandler extends icms_ipf_Handler {
 		$end_date = $eventObj->getVar('end_date', 'e');
 			
 		// Format date. Check the month of each. Are they the same?
-		if (date('n', $start_date) == date('n', $end_date))
+		if (formatTimestamp($start_date, 'n') == formatTimestamp($end_date, 'n'))
 		{
-            if (date('d', $start_date) == date('d', $end_date))
+            if (formatTimestamp($start_date, 'd') == formatTimestamp($end_date, 'd'))
             {
-                $event['formatted_date'] = date('j F y', $start_date);
+                $event['formatted_date'] = icms_conv_nr2local(formatTimestamp($start_date, 'j'))
+					. ' ' . formatTimestamp($start_date, 'F')
+					. ' ' . icms_conv_nr2local(formatTimestamp($start_date, 'y'));
             }
             else
             {
 			// If so, format using the start month once, eg. 1-3 January
-			$event['formatted_date'] = date('j', $start_date) . '-' . date ('j', $end_date) . ' ' 
-					. date('F', $start_date);
+			$event['formatted_date'] = icms_conv_nr2local(formatTimestamp($start_date, 'j'))
+					. '-' . icms_conv_nr2local(formatTimestamp($end_date, 'j'))
+					. ' ' . formatTimestamp($start_date, 'F');
 		    }
         }
 		else
 		{
 			// If not, then specify using both the start/end months
-			$event['formatted_date'] = date('j', $start_date) . ' ' . date('F', $start_date) . ' - '
-					. date ('j', $end_date) . ' ' . date('F', $end_date);
+			$event['formatted_date'] = icms_conv_nr2local(formatTimestamp($start_date, 'j'))
+					. ' ' . formatTimestamp($start_date, 'F') . ' - '
+					. icms_conv_nr2local(formatTimestamp($end_date, 'j'))
+					. ' ' . formatTimestamp($end_date, 'F');
 		}
 		
 		// TEMPORARY: Set a 'link' field, which will be either i) the itemUrl, if the event has a
