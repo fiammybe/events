@@ -61,14 +61,14 @@ if($eventObj && !$eventObj->isNew()) {
 	{
 		$newEvent = array(
 			"title" => $eventObj->vars['title']['value']
-			, "start" => date('Y-m-d G:i:s', $eventObj->vars['date']['value'])
-			, "end" => date('Y-m-d G:i:s', $eventObj->vars['end_date']['value'])
+			, "start" => formatTimestamp($eventObj->vars['date']['value'], 'custom', 'Y-m-d G:i:s')
+			, "end" => formatTimestamp($eventObj->vars['end_date']['value'], 'custom', 'Y-m-d G:i:s')
 			, "url" => $modPath . '/event.php?event_id=' . $eventObj->vars['event_id']['value']
 		);
 		$calendar_events[] = $newEvent;
 		$event = '';
-		$year = date('Y', $eventObj->getVar('date', 'e'));
-		$month = date('F', $eventObj->getVar('date', 'e'));
+		$year = formatTimestamp($eventObj->getVar('date', 'e'), 'Y');
+		$month = formatTimestamp($eventObj->getVar('date', 'e'), 'F');
 		
 		// Format the start/end dates for user-side display
 		$event = $events_event_handler->prepareEventForDisplay($eventObj, FALSE);
