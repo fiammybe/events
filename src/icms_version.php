@@ -97,7 +97,7 @@ $modversion['blocks'][1] = array(
   'description' => _MI_EVENTS_UPCOMINGDSC,
   'show_func' => 'events_upcoming_show',
   'edit_func' => 'events_upcoming_edit',
-  'options' => '5|90|0',
+  'options' => '5|90|0|0',
   'template' => 'events_upcoming.html');
 
 /** Preferences information */

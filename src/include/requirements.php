@@ -15,7 +15,11 @@ defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
 $failed_requirements = array();
 
-if (ICMS_VERSION_BUILD < 50) {
+if (version_compare(PHP_VERSION, '8.2.0', '<')) {
+    $failed_requirements[] = _AM_EVENTS_REQUIREMENTS_PHP_VERSION;
+}
+
+if (ICMS_VERSION_BUILD < 120) {
     $failed_requirements[] = _AM_EVENTS_REQUIREMENTS_ICMS_BUILD;
 }
 

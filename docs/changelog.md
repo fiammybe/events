@@ -15,3 +15,10 @@
 - Fix bug in search function that was crashing profile views.
 - Add static 'type' field identifying events as "Event" resources.
 - Add support for tagging via Sprockets module, including tracking of untagged content and dynamic tagging of the block.
+
+## Version 1.1 (ImpressCMS 2.0.4 / PHP 8.2 compatibility)
+- Require ImpressCMS 2.0.4 and PHP 8.2 (requirements check, composer.json).
+- Replace the removed `icms_getModuleInfo()` with the module handler.
+- Fix PHP 8 issues: required parameter after optional one in `getEventsForSearch()`, `date()` TypeError on events without end date, undefined block options and variables.
+- Fix wrong argument list when fetching the Sprockets taglink handler after saving an event.
+- Point `pastevents.php` to an existing template.

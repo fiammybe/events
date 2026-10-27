@@ -35,3 +35,13 @@ if (!defined("EVENTS_ADMIN_URL")) {
 
 // Include the common language file of the module
 icms_loadLanguageFile("events", "common");
+
+// The Dutch core language file lacks this constant, which the IPF image form element requires
+if (!defined('_CO_ICMS_URL_FILE')) {
+    define('_CO_ICMS_URL_FILE', 'URL: ');
+}
+
+// The core form template uses this constant, which some core language files lack
+if (!defined('_MD_AM_HELP_TIP')) {
+    define('_MD_AM_HELP_TIP', 'Help');
+}

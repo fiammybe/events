@@ -37,7 +37,12 @@ class mod_events_EventHandler extends icms_ipf_Handler
         // Initialise variables
         $event = $eventObj->toArray();
         $start_date = $eventObj->getVar('date', 'e');
-        $end_date = $eventObj->getVar('end_date', 'e');
+        $end_date = (int) $eventObj->getVar('end_date', 'e');
+        $start_date = (int) $start_date;
+
+        if ($end_date === 0) {
+            $end_date = $start_date;
+        }
 
         // Format date. Check the month of each. Are they the same?
         if (date('n', $start_date) == date('n', $end_date)) {
@@ -106,7 +111,7 @@ class mod_events_EventHandler extends icms_ipf_Handler
      * @param int $userid
      * @return array
      */
-    public function getEventsForSearch($queryarray, $andor, $limit, $offset = 0, $userid)
+    public function getEventsForSearch($queryarray, $andor, $limit, $offset = 0, $userid = 0)
     {
         $count = '';
         $results = '';
@@ -302,7 +307,6 @@ class mod_events_EventHandler extends icms_ipf_Handler
             $sprockets_taglink_handler = icms_getModuleHandler(
                 'taglink',
                 $sprocketsModule->getVar('dirname'),
-                $sprocketsModule->getVar('dirname'),
                 'sprockets'
             );
 
@@ -329,7 +333,7 @@ class mod_events_EventHandler extends icms_ipf_Handler
         $module_id = '';
         $tag = '';
         $item_id = '';
-        $sprocketsModule = icms_getModuleInfo('sprockets');
+        $sprocketsModule = icms::handler("icms_module")->getByDirname("sprockets");
 
         // Delete taglinks
         if (icms_get_module_status("sprockets")) {

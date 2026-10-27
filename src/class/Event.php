@@ -89,8 +89,8 @@ class mod_events_Event extends icms_ipf_seo_Object
      * Overriding the icms_ipf_Object::getVar method to assign a custom method on some
      * specific fields to handle the value before returning it
      *
-     * @param str $key key of the field
-     * @param str $format format that is requested
+     * @param string $key key of the field
+     * @param string $format format that is requested
      * @return mixed value of the field that is requested
      */
     public function getVar($key, $format = "s")
@@ -162,7 +162,7 @@ class mod_events_Event extends icms_ipf_seo_Object
     {
 
         $ret = array();
-        $sprocketsModule = icms_getModuleInfo('sprockets');
+        $sprocketsModule = icms::handler("icms_module")->getByDirname("sprockets");
 
         // Retrieve the tags for this object
         if (icms_get_module_status("sprockets")) {

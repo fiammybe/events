@@ -24,6 +24,7 @@ $icmsTheme->addStylesheet($modPath . '/library/fullcalendar/fullcalendar.print.c
 
 $events_event_handler = icms_getModuleHandler("event", basename(dirname(__FILE__)), "events");
 
+$calendar_events = array();
 $clean_event_id = isset($_GET["event_id"]) ? (int)$_GET["event_id"] : 0 ;
 $eventObj = $events_event_handler->get($clean_event_id);
 
@@ -45,7 +46,6 @@ if ($eventObj && !$eventObj->isNew()) {
     // '>=' = Future and now
     // '<' = Only Past
     // '<=' Past and Now
-    $criteria->add(new icms_db_criteria_Item('date', $time, ''));
     $criteria->add(new icms_db_criteria_Item('online_status', '1'));
     $criteria->setSort('date');
     $criteria->setOrder('ASC');
@@ -56,7 +56,6 @@ if ($eventObj && !$eventObj->isNew()) {
     ///////////////////////////////////////////////////////
 
     $sorted_events = array();
-    $calendar_events = array();
     // echo '<pre>' . print_r($events_event_array, true) . '</pre>';
     foreach ($events_event_array as $eventObj) {
         $newEvent = array(

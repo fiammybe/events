@@ -13,7 +13,7 @@
 
 include_once "header.php";
 
-$xoopsOption["template_main"] = "events_pastevent.html";
+$xoopsOption["template_main"] = "events_event.html";
 include_once ICMS_ROOT_PATH . "/header.php";
 
 $events_event_handler = icms_getModuleHandler("event", "events", "events");

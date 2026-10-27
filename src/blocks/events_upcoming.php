@@ -28,6 +28,9 @@ function events_upcoming_show($options): array
 {
     global $icmsConfig, $eventsConfig;
 
+    $options = array_pad($options, 4, 0);
+    $block = array();
+
     $eventsModule = icms::handler("icms_module")->getByDirname("events");
     include_once(ICMS_ROOT_PATH . '/modules/' . $eventsModule->getVar('dirname') . '/include/common.php');
     $events_event_handler = icms_getModuleHandler('event', 'events', 'events');
@@ -113,14 +116,9 @@ function events_upcoming_show($options): array
             $event['itemLink'] = '<a href="' . $identifier . '">' . $event['title'] . '</a>';
         }
 
-        if ($event['promoimage1']) {
-            $promoimage1 = ICMS_URL . '/uploads/events/' . $event['promoimage1'];
-        }
-
-        if ($event['promoimage2']) {
-            $promoimage2 = ICMS_URL . '/uploads/events/' . $event['promoimage2'];
-        }
     }
+
+    unset($event);
 
     return $block;
 }
@@ -134,14 +132,15 @@ function events_upcoming_show($options): array
 
 function events_upcoming_edit($options)
 {
-    $eventsModule = icms_getModuleInfo('events');
+    $options = array_pad($options, 4, 0);
+    $eventsModule = icms::handler("icms_module")->getByDirname("events");
     include_once(ICMS_ROOT_PATH . '/modules/' . $eventsModule->getVar('dirname') . '/include/common.php');
     $events_event_handler = icms_getModuleHandler('event', 'events', 'events');
 
     // Select number of upcoming events to display in the block
     $form = '<table><tr>';
     $form .= '<tr><td>' . _MB_EVENTS_EVENT_UPCOMING_LIMIT . '</td>';
-    $form .= '<td>' . '<input type="text" name="options[]" value="' . $options[0] . '" /></td>';
+    $form .= '<td>' . '<input type="text" name="options[0]" value="' . $options[0] . '" /></td>';
     $form .= '</tr>';
 
     // Limit title length
@@ -206,6 +205,9 @@ function events_upcoming_menu_show($options)
 {
     global $icmsConfig, $eventsConfig;
 
+    $options = array_pad($options, 4, 0);
+    $block = array();
+
     $eventsModule = icms::handler("icms_module")->getByDirname("events");
     include_once(ICMS_ROOT_PATH . '/modules/' . $eventsModule->getVar('dirname') . '/include/common.php');
     $events_event_handler = icms_getModuleHandler('event', 'events', 'events');
@@ -292,6 +294,8 @@ function events_upcoming_menu_show($options)
         }
     }
 
+    unset($event);
+
     return $block;
 }
 
@@ -304,14 +308,15 @@ function events_upcoming_menu_show($options)
 
 function events_upcoming_menu_edit($options)
 {
-    $eventsModule = icms_getModuleInfo('events');
+    $options = array_pad($options, 4, 0);
+    $eventsModule = icms::handler("icms_module")->getByDirname("events");
     include_once(ICMS_ROOT_PATH . '/modules/' . $eventsModule->getVar('dirname') . '/include/common.php');
     $events_event_handler = icms_getModuleHandler('event', 'events', 'events');
 
     // Select number of upcoming events to display in the block
     $form = '<table><tr>';
     $form .= '<tr><td>' . _MB_EVENTS_EVENT_UPCOMING_LIMIT . '</td>';
-    $form .= '<td>' . '<input type="text" name="options[]" value="' . $options[0] . '" /></td>';
+    $form .= '<td>' . '<input type="text" name="options[0]" value="' . $options[0] . '" /></td>';
     $form .= '</tr>';
 
     // Limit title length
